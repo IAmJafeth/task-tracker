@@ -1,10 +1,18 @@
 import argparse
+import tomllib
+
+def get_app_version() -> str:
+    with open("pyproject.toml", "rb") as f:
+        data = tomllib.load(f)
+    return data.get("project", {}).get("version")
 
 parser = argparse.ArgumentParser(
     prog="Task-Tracker",
     description="A simple CLI application to manage tasks",
     epilog="A project from @Roadmap.sh",
 )
+
+parser.add_argument("-v", "--version", help="Return the task-tracker version installed", action="version", version=get_app_version())
 
 sub_parser = parser.add_subparsers(
     required=True,
