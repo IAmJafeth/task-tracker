@@ -17,6 +17,7 @@ parser.add_argument("-v", "--version", help="Return the task-tracker version ins
 sub_parser = parser.add_subparsers(
     required=True,
     title="Action to take",
+    dest="action"
 )
 
 create_parser = sub_parser.add_parser("create", help="Create a new task")
