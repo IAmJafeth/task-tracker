@@ -1,5 +1,4 @@
 import argparse
-from operator import sub
 
 parser = argparse.ArgumentParser(
     prog="Task-Tracker",
@@ -23,3 +22,9 @@ list_parser = sub_parser.add_parser("list", help="List all tasks")
 
 delete_parser = sub_parser.add_parser("delete", help="Delete a task")
 delete_parser.add_argument("Task ID", help="ID of the task to be deleted")
+
+mark_in_progress_parser = sub_parser.add_parser("mark-in-progress", help="Mark a Task as in-progress")
+mark_in_progress_parser.add_argument("Task ID", help="ID of the task to be marked as in-progress")
+
+mark_done_parser = sub_parser.add_parser("mark-done", help= "Mark a task as done")
+mark_done_parser.add_argument("Task ID", help="ID of the task to be marked as done")
