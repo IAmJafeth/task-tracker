@@ -29,14 +29,23 @@ class Task:
     def update_description(self, new_description: str) -> None:
         self.description = new_description
         self.udpatedAt = datetime.now()
-    
+
     def get_details(self) -> str:
         created = self.createdAt.isoformat(sep=" ", timespec="minutes")
         updated = self.updatedAt.isoformat(sep=" ", timespec="minutes")
         return str(self) + f"\n\033[2mCreated:{created} Updated:{updated}\033[0m"
-
+    
+    def __status_color(self) -> str: 
+        status_with_color = {
+            TaskStatus.TODO: "\033[33mTodo\033[0m",
+            TaskStatus.INPROGRESS: "\033[34mIn Progress\033[0m",
+            TaskStatus.DONE: "\033[32mDone\033[0m",
+        }
+        
+        return status_with_color[self.status]
+        
     def __str__(self) -> str:
-        return f"{self.id}: {self.description}"
+        return f"{self.id}: {self.description} | {self.__status_color()}"
 
 
 @dataclass
@@ -94,9 +103,8 @@ def format_task(task: Task, details: bool = False) -> str:
 
 def format_task_list(task_list: TaskList, details: bool = False) -> str:
     tasks = task_list.list_tasks()
-    
-    if not tasks: 
+
+    if not tasks:
         return "No tasks saved yet!"
-    
+
     return "\n".join(format_task(task, details) for task in tasks)
-    
