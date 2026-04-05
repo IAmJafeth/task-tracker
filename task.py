@@ -89,12 +89,14 @@ class TaskList:
         task.mark_done()
         return task
 
+def format_task(task: Task, details: bool = False) -> str:
+    return task.get_details() if details else str(task)
+
 def format_task_list(task_list: TaskList, details: bool = False) -> str:
     tasks = task_list.list_tasks()
     
     if not tasks: 
         return "No tasks saved yet!"
     
-    return "\n".join(task.get_details() if details else str(task) for task in tasks)
-    
+    return "\n".join(format_task(task, details) for task in tasks)
     

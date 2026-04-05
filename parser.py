@@ -38,7 +38,7 @@ update_parser.add_argument(
     "task_id", help="ID of the task to update", type=int, metavar="Task ID"
 )
 update_parser.add_argument(
-    "decription", help="New description for the task", type=str, metavar="Description"
+    "description", help="New description for the task", type=str, metavar="Description"
 )
 
 list_parser = sub_parser.add_parser("list", help="List all tasks", parents=[global_parser])
