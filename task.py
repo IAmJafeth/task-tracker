@@ -30,9 +30,16 @@ class Task:
         self.description = new_description
         self.udpatedAt = datetime.now()
 
+    def __str__(self) -> str:
+        created = self.createdAt.isoformat(sep=" ", timespec="minutes")
+        updated = self.updatedAt.isoformat(sep=" ", timespec="minutes")
+        return f"""{self.id}: {self.description}
+        \033[2mCreated:{created} Updated:{updated}\033[0m
+        """
+
 
 @dataclass
-class TaskManager:
+class TaskList:
     _tasks: dict[int, Task] = field(default_factory=dict)
     _id_counter: int = field(default=1)
 
@@ -80,3 +87,13 @@ class TaskManager:
 
         task.mark_done()
         return task
+
+def format_task_list(task_list: TaskList) -> str:
+    tasks = task_list.list_tasks()
+    
+    if not tasks: 
+        return "No tasks saved yet!"
+    
+    return "\n".join(str(task) for task in tasks)
+    
+    
