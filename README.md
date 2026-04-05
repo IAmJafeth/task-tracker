@@ -1,36 +1,48 @@
-# Task Tracker
+<div align="center">
 
-A simple command-line interface (CLI) application to manage tasks, built with Python.
+# 📝 Task Tracker
 
-This project is part of the [Roadmap.sh Task Tracker Project](https://roadmap.sh/projects/task-tracker).
+![Status](https://img.shields.io/badge/status-work%20in%20progress-yellow)
+![Python](https://img.shields.io/badge/python-3.13+-blue.svg)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
 
-## Features
+**A simple and elegant command-line interface (CLI) application to manage your tasks**
 
-- Add, update, and delete tasks
-- Mark tasks as in-progress or done
-- List all tasks or filter by status (todo, in-progress, done)
-- View detailed task information
-- Persistent task storage using JSON
+Built with Python | Part of [Roadmap.sh Task Tracker Project](https://roadmap.sh/projects/task-tracker)
 
-## Requirements
+---
+
+</div>
+
+## ✨ Features
+
+-  **Add, Update, Delete** - Full CRUD operations for task management
+-  **Status Tracking** - Mark tasks as todo, in-progress, or done
+-  **Task Filtering** - List all tasks or filter by specific status
+-  **Persistent Storage** - All tasks saved automatically in JSON format *(TODO)*
+
+## 📋 Requirements
 
 - Python 3.13 or higher
+- No external dependencies required!
 
-## Installation
+## 🚀 Installation
 
-1. Clone the repository:
-```bash
-git clone https://github.com/IAmJafeth/task-tracker.git
-cd task-tracker
-```
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/IAmJafeth/task-tracker.git
+   cd task-tracker
+   ```
 
-2. (Optional) Create and activate a virtual environment:
-```bash
-python -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-```
+2. **Create a virtual environment** (optional but recommended):
+   ```bash
+   python -m venv .venv
+   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+   ```
 
-## Usage
+3. **Start tracking your tasks!** 🎉
+
+## 💻 Usage
 
 Run the task tracker using:
 
@@ -38,7 +50,7 @@ Run the task tracker using:
 python main.py [command] [options]
 ```
 
-### Available Commands
+### 📚 Available Commands
 
 #### Add a new task
 ```bash
@@ -79,13 +91,15 @@ python main.py mark-done <task_id>
 python main.py mark-done <task_id> -d  # Show details after marking
 ```
 
-### Options
+### ⚙️ Options
 
-- `-d, --details` - Show detailed task information
-- `-v, --version` - Display the application version
-- `-h, --help` - Show help message
+| Option | Description |
+|--------|-------------|
+| `-d, --details` | Show detailed task information |
+| `-v, --version` | Display the application version |
+| `-h, --help` | Show help message |
 
-### Examples
+### 📖 Examples
 
 ```bash
 # Add a new task
@@ -110,17 +124,29 @@ python main.py list done -d
 python main.py delete 3
 ```
 
-## Project Structure
+## 📁 Project Structure
 
-- `main.py` - Entry point and CLI command handlers
-- `parser.py` - Command-line argument parsing
-- `task.py` - Task and TaskList classes with core functionality
-- `pyproject.toml` - Project metadata and configuration
+```
+task-tracker/
+├── main.py          # Entry point and CLI command handlers
+├── parser.py        # Command-line argument parsing
+├── task.py          # Task and TaskList classes with core functionality
+└── pyproject.toml   # Project metadata and configuration
+```
 
-## License
+## 📄 License
 
 This project is created as part of the Roadmap.sh project series.
 
-## Project Page
+## 🔗 Links
 
-For more information about this project, visit: https://roadmap.sh/projects/task-tracker
+- **Project Page:** [Roadmap.sh Task Tracker](https://roadmap.sh/projects/task-tracker)
+- **Repository:** [GitHub](https://github.com/IAmJafeth/task-tracker)
+
+---
+
+<div align="center">
+
+Made with ❤️ as part of the [Roadmap.sh](https://roadmap.sh) project series
+
+</div>
