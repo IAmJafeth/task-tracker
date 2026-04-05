@@ -8,10 +8,16 @@ def get_app_version() -> str:
     return data.get("project", {}).get("version")
 
 
+global_parser = argparse.ArgumentParser(add_help=False)
+global_parser.add_argument(
+    "-d", "--details", help="Show task details", action="store_true", default=False
+)
+
 parser = argparse.ArgumentParser(
     prog="Task-Tracker",
     description="A simple CLI application to manage tasks",
     epilog="A project from @Roadmap.sh",
+    parents=[global_parser]
 )
 
 parser.add_argument(
@@ -24,10 +30,10 @@ parser.add_argument(
 
 sub_parser = parser.add_subparsers(required=True, title="Action to take", dest="action")
 
-add_parser = sub_parser.add_parser("add", help="Add a new task")
+add_parser = sub_parser.add_parser("add", help="Add a new task", parents=[global_parser])
 add_parser.add_argument("description", help="Description for the new task", type=str)
 
-update_parser = sub_parser.add_parser("update", help="Update a tasks decription")
+update_parser = sub_parser.add_parser("update", help="Update a tasks decription", parents=[global_parser])
 update_parser.add_argument(
     "task_id", help="ID of the task to update", type=int, metavar="Task ID"
 )
@@ -35,15 +41,15 @@ update_parser.add_argument(
     "decription", help="New description for the task", type=str, metavar="Description"
 )
 
-list_parser = sub_parser.add_parser("list", help="List all tasks")
+list_parser = sub_parser.add_parser("list", help="List all tasks", parents=[global_parser])
 
-delete_parser = sub_parser.add_parser("delete", help="Delete a task")
+delete_parser = sub_parser.add_parser("delete", help="Delete a task", parents=[global_parser])
 delete_parser.add_argument(
     "task_id", help="ID of the task to be deleted", type=int, metavar="Task ID"
 )
 
 mark_in_progress_parser = sub_parser.add_parser(
-    "mark-in-progress", help="Mark a Task as in-progress"
+    "mark-in-progress", help="Mark a Task as in-progress", parents=[global_parser]
 )
 mark_in_progress_parser.add_argument(
     "task_id",
@@ -52,7 +58,7 @@ mark_in_progress_parser.add_argument(
     metavar="Task ID",
 )
 
-mark_done_parser = sub_parser.add_parser("mark-done", help="Mark a task as done")
+mark_done_parser = sub_parser.add_parser("mark-done", help="Mark a task as done", parents=[global_parser])
 mark_done_parser.add_argument(
     "task_id", help="ID of the task to be marked as done", type=int, metavar="Task ID"
 )

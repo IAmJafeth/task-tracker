@@ -11,13 +11,12 @@ def main():
     match action:
         case "add":
             task: Task = task_list.create_task(args.description)
-            print(f"Task added succesfully (ID: {task.id})")
+            task_info = "\n"+task.get_details() if args.details else f"(ID: {task.id})"   
+            print(f"\033[32mTask added succesfully\033[0m {task_info} ")
         
         case "list":
-            print(format_task_list(task_list))
+            print(format_task_list(task_list,args.details))
         
-        case _:
-            print("Error: Invalid command")
 
 if __name__ == "__main__":
     main()

@@ -29,11 +29,14 @@ class Task:
     def update_description(self, new_description: str) -> None:
         self.description = new_description
         self.udpatedAt = datetime.now()
-
-    def __str__(self) -> str:
+    
+    def get_details(self) -> str:
         created = self.createdAt.isoformat(sep=" ", timespec="minutes")
         updated = self.updatedAt.isoformat(sep=" ", timespec="minutes")
-        return f"{self.id}: {self.description}\n\033[2mCreated:{created} Updated:{updated}\033[0m"
+        return str(self) + f"\n\033[2mCreated:{created} Updated:{updated}\033[0m"
+
+    def __str__(self) -> str:
+        return f"{self.id}: {self.description}"
 
 
 @dataclass
@@ -86,12 +89,12 @@ class TaskList:
         task.mark_done()
         return task
 
-def format_task_list(task_list: TaskList) -> str:
+def format_task_list(task_list: TaskList, details: bool = False) -> str:
     tasks = task_list.list_tasks()
     
     if not tasks: 
         return "No tasks saved yet!"
     
-    return "\n".join(str(task) for task in tasks)
+    return "\n".join(task.get_details() if details else str(task) for task in tasks)
     
     
