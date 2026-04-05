@@ -16,7 +16,7 @@ def main():
         case "add":
             task: Task = task_list.create_task(args.description)
             task_info = "\n"+task.get_details() if args.details else f"(ID: {task.id})"   
-            print(f"\033[32mTask added succesfully\033[0m {task_info} ")
+            print(f"\033[32mTask added\033[0m {task_info} ")
         
         case "list":
             print(format_task_list(task_list, args.details, args.status_filter))
@@ -32,10 +32,23 @@ def main():
         case "update":
             try: 
                 task = task_list.update_task(args.task_id, args.description)
-                print(f"\033[32mTask updated succesfully\033[0m\n{format_task(task, args.details)}")
+                print(f"\033[32mTask updated\033[0m\n{format_task(task, args.details)}")
             except ValueError as e:
                print(f"\033[0;31mError\033[0m: {e}")
         
+        case "mark-in-progress":
+            try: 
+                task = task_list.mark_task_in_progress(args.task_id)
+                print(f"\033[32mTask marked in progress\033[0m\n{format_task(task, args.details)}")
+            except ValueError as e:
+               print(f"\033[0;31mError\033[0m: {e}")
+        
+        case "mark-done":
+            try: 
+                task = task_list.mark_task_done(args.task_id)
+                print(f"\033[32mTask marked done\033[0m\n{format_task(task, args.details)}")
+            except ValueError as e:
+               print(f"\033[0;31mError\033[0m: {e}")
                
         case _:
             print("\033[0;31mError\033[0m: Invalid command")
