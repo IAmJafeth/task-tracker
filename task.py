@@ -14,24 +14,24 @@ class Task:
     id: int
     description: str
     status: TaskStatus = field(default=TaskStatus.TODO)
-    createdAt: datetime = field(default_factory=datetime.now)
-    updatedAt: datetime = field(default_factory=datetime.now)
+    created_at: datetime = field(default_factory=datetime.now)
+    updated_at: datetime = field(default_factory=datetime.now)
 
     def mark_in_progress(self) -> None:
         self.status = TaskStatus.INPROGRESS
-        self.updatedAt = datetime.now()
+        self.updated_at = datetime.now()
 
     def mark_done(self) -> None:
         self.status = TaskStatus.DONE
-        self.udpatedAt = datetime.now()
+        self.updated_at = datetime.now()
 
     def update_description(self, new_description: str) -> None:
         self.description = new_description
-        self.udpatedAt = datetime.now()
+        self.updated_at = datetime.now()
 
     def get_details(self) -> str:
-        created = self.createdAt.isoformat(sep=" ", timespec="minutes")
-        updated = self.updatedAt.isoformat(sep=" ", timespec="minutes")
+        created = self.created_at.isoformat(sep=" ", timespec="minutes")
+        updated = self.updated_at.isoformat(sep=" ", timespec="minutes")
         return str(self) + f"\n\033[2mCreated:{created} Updated:{updated}\033[0m"
     
     def __status_color(self) -> str: 
