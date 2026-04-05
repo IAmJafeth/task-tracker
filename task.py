@@ -64,19 +64,19 @@ class TaskManager:
         return task
 
     def mark_task_in_progress(self, id: int) -> Task:
-        task = self._tasks.get(id) 
-        
+        task = self._tasks.get(id)
+
         if not task:
             raise ValueError(f"Task {id} does not exist")
-            
+
         task.mark_in_progress()
         return task
-    
+
     def mark_task_done(self, id: int) -> Task:
         task = self._tasks.get(id)
-        
+
         if not task:
             raise ValueError(f"Task {id} does not exits")
-        
+
         task.mark_done()
-        return task 
+        return task
