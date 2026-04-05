@@ -33,9 +33,7 @@ class Task:
     def __str__(self) -> str:
         created = self.createdAt.isoformat(sep=" ", timespec="minutes")
         updated = self.updatedAt.isoformat(sep=" ", timespec="minutes")
-        return f"""{self.id}: {self.description}
-        \033[2mCreated:{created} Updated:{updated}\033[0m
-        """
+        return f"{self.id}: {self.description}\n\033[2mCreated:{created} Updated:{updated}\033[0m"
 
 
 @dataclass
@@ -50,8 +48,8 @@ class TaskList:
 
         return task
 
-    def list_tasks(self) -> dict[int, Task]:
-        return self._tasks
+    def list_tasks(self) -> list[Task]:
+        return list(self._tasks.values())
 
     def update_task(self, id: int, description: str) -> Task:
         task = self._tasks.get(id)

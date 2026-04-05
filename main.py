@@ -1,5 +1,5 @@
 from parser import parser
-from task import Task, TaskList
+from task import Task, TaskList, format_task_list
 
 def main():
     task_list = TaskList()
@@ -12,6 +12,9 @@ def main():
         case "add":
             task: Task = task_list.create_task(args.description)
             print(f"Task added succesfully (ID: {task.id})")
+        
+        case "list":
+            print(format_task_list(task_list))
         
         case _:
             print("Error: Invalid command")
