@@ -9,13 +9,14 @@ class TaskStatus(str, Enum):
     INPROGRESS = "in-progress"
     DONE = "done"
 
+
 @dataclass
 class Task:
     id: int
     description: str
-    status: TaskStatus = field(default= TaskStatus.TODO)
-    createdAt:datetime = field(default_factory=datetime.now)
-    updatedAt:datetime = field(default_factory=datetime.now)
+    status: TaskStatus = field(default=TaskStatus.TODO)
+    createdAt: datetime = field(default_factory=datetime.now)
+    updatedAt: datetime = field(default_factory=datetime.now)
 
     def mark_in_progress(self) -> None:
         self.status = TaskStatus.INPROGRESS
@@ -28,6 +29,7 @@ class Task:
     def update_description(self, new_description: str) -> None:
         self.description = new_description
         self.udpatedAt = datetime.now()
+
 
 @dataclass
 class TaskManager:
@@ -53,10 +55,28 @@ class TaskManager:
         task.update_description(description)
         return task
 
-    def delete_task(self, id:int) -> Task:
+    def delete_task(self, id: int) -> Task:
         task = self._tasks.pop(id, None)
 
         if not task:
-            raise ValueError(f"Task {id} does not exist"///)
+            raise ValueError(f"Task {id} does not exist")
 
         return task
+
+    def mark_task_in_progress(self, id: int) -> Task:
+        task = self._tasks.get(id) 
+        
+        if not task:
+            raise ValueError(f"Task {id} does not exist")
+            
+        task.mark_in_progress()
+        return task
+    
+    def mark_task_done(self, id: int) -> Task:
+        task = self._tasks.get(id)
+        
+        if not task:
+            raise ValueError(f"Task {id} does not exits")
+        
+        task.mark_done()
+        return task 
