@@ -42,6 +42,7 @@ update_parser.add_argument(
 )
 
 list_parser = sub_parser.add_parser("list", help="List all tasks", parents=[global_parser])
+list_parser.add_argument("status_filter", help="Filter tasks by status", metavar="Status Filter", choices=["todo", "in-progress", "done"], nargs="?")
 
 delete_parser = sub_parser.add_parser("delete", help="Delete a task", parents=[global_parser])
 delete_parser.add_argument(

@@ -5,6 +5,9 @@ def main():
     task_list = TaskList()
     task_list.create_task("Test Task")
     task_list.create_task("Second Task")
+    task_list.mark_task_in_progress(2)
+    task_list.create_task("Task Completed")
+    task_list.mark_task_done(3)
     args = parser.parse_args()
     
     action: str = args.action
@@ -16,7 +19,7 @@ def main():
             print(f"\033[32mTask added succesfully\033[0m {task_info} ")
         
         case "list":
-            print(format_task_list(task_list,args.details))
+            print(format_task_list(task_list, args.details, args.status_filter))
         
         case "delete":
             try:
@@ -32,6 +35,7 @@ def main():
                 print(f"\033[32mTask updated succesfully\033[0m\n{format_task(task, args.details)}")
             except ValueError as e:
                print(f"\033[0;31mError\033[0m: {e}")
+        
                
         case _:
             print("\033[0;31mError\033[0m: Invalid command")

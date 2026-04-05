@@ -101,10 +101,15 @@ class TaskList:
 def format_task(task: Task, details: bool = False) -> str:
     return task.get_details() if details else str(task)
 
-def format_task_list(task_list: TaskList, details: bool = False) -> str:
+def format_task_list(task_list: TaskList, details: bool = False, status_filter: TaskStatus | None = None) -> str:
     tasks = task_list.list_tasks()
 
     if not tasks:
         return "No tasks saved yet!"
+    
+    if status_filter:
+        formated_tasks = "\n".join(format_task(task, details) for task in tasks if task.status == status_filter)
+    else:
+       formated_tasks = "\n".join(format_task(task, details) for task in tasks)
 
-    return "\n".join(format_task(task, details) for task in tasks)
+    return formated_tasks
