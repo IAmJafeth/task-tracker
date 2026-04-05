@@ -17,6 +17,16 @@ def main():
         case "list":
             print(format_task_list(task_list,args.details))
         
+        case "delete":
+            try:
+                task = task_list.delete_task(args.task_id)
+                task_info = task.get_details() if args.details else str(task)
+                print(f"\033[0;31mTask DELETED\033[0m\n{task_info}")
+            except ValueError as e:
+               print(f"Error: {e}")
+
+        case _:
+            print("Error: Invalid command")
 
 if __name__ == "__main__":
     main()
