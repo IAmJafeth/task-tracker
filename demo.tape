@@ -48,12 +48,14 @@ Output demo.gif
 
 Require task-tracker
 
-Set FontSize 16
-Set Width 1200
-Set Height 700
+Set FontSize 20
+Set Width 1400
+Set Height 800
 Set Theme "Catppuccin Mocha"
 Set Padding 20
-Set LoopOffset 80%
+Set LineHeight 1.4
+Set LetterSpacing 1.0
+Set LoopOffset 95%
 Set PlaybackSpeed 1.0
 
 Hide
@@ -109,8 +111,8 @@ Sleep 2s
 
 # Final list
 Type "task-tracker list" Sleep 500ms Enter
-Sleep 3s
+Sleep 2s
 
 # Check version
 Type "task-tracker -v" Sleep 500ms Enter
-Sleep 2s
+Sleep 1s
