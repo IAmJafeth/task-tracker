@@ -12,6 +12,8 @@ Built with Python | Part of [Roadmap.sh Task Tracker Project](https://roadmap.sh
 
 ---
 
+![Demo](demo.gif)
+
 </div>
 
 ## ✨ Features
