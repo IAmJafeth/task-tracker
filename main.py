@@ -1,5 +1,6 @@
 from parser import parser
-from task import Task, TaskList, format_task, format_task_list
+from task import Task, format_task
+from tasklist import TaskList, format_task_list
 
 def main():
     task_list = TaskList()
