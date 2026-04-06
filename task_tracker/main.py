@@ -1,12 +1,13 @@
-from parser import parser
-from task import Task, format_task
-from tasklist import format_task_list
-from taskstorage import JsonTaskStorate
+from .parser import parser
+from .task import Task, format_task
+from .tasklist import format_task_list
+from .taskstorage import JsonTaskStorate
 from pathlib import Path
 
 def main():
-    BASE_DIR = Path(__file__).resolve().parent
-    SAVE_FILE = BASE_DIR / "tasks.json"
+    # Use user's home directory for tasks.json
+    SAVE_FILE = Path.home() / ".task-tracker" / "tasks.json"
+    SAVE_FILE.parent.mkdir(parents=True, exist_ok=True)
     
     args = parser.parse_args()
     

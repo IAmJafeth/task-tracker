@@ -30,67 +30,95 @@ Built with Python | Part of [Roadmap.sh Task Tracker Project](https://roadmap.sh
 
 ## 🚀 Installation
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/IAmJafeth/task-tracker.git
-   cd task-tracker
-   ```
+### Option 1: Install with pipx (Recommended)
 
-2. **Create a virtual environment** (optional but recommended):
-   ```bash
-   python -m venv .venv
-   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-   ```
+Install globally using [pipx](https://pipx.pypa.io/):
 
-3. **Start tracking your tasks!** 🎉
+```bash
+pipx install git+https://github.com/IAmJafeth/task-tracker.git
+```
+
+Or install from local directory:
+
+```bash
+git clone https://github.com/IAmJafeth/task-tracker.git
+cd task-tracker
+pipx install .
+```
+
+### Option 2: Install with pip
+
+Using a virtual environment (recommended):
+
+```bash
+git clone https://github.com/IAmJafeth/task-tracker.git
+cd task-tracker
+python -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+pip install -e .
+```
+
+### Option 3: Development Mode
+
+For development or testing:
+
+```bash
+git clone https://github.com/IAmJafeth/task-tracker.git
+cd task-tracker
+pip install -e .  # Editable install
+```
+
+After installation, you can use the `task-tracker` command from anywhere!
 
 ## 💻 Usage
 
-Run the task tracker using:
+Run the task tracker from anywhere using:
 
 ```bash
-python main.py [command] [options]
+task-tracker [command] [options]
 ```
+
+Tasks are stored in `~/.task-tracker/tasks.json`
 
 ### 📚 Available Commands
 
 #### Add a new task
 ```bash
-python main.py add "Task description"
-python main.py add "Task description" -d  # Show details after adding
+task-tracker add "Task description"
+task-tracker add "Task description" -d  # Show details after adding
 ```
 
 #### List tasks
 ```bash
-python main.py list                    # List all tasks
-python main.py list todo               # List tasks with status "todo"
-python main.py list in-progress        # List tasks with status "in-progress"
-python main.py list done               # List tasks with status "done"
-python main.py list -d                 # List all tasks with details
+task-tracker list                    # List all tasks
+task-tracker list todo               # List tasks with status "todo"
+task-tracker list in-progress        # List tasks with status "in-progress"
+task-tracker list done               # List tasks with status "done"
+task-tracker list -d                 # List all tasks with details
 ```
 
 #### Update a task
 ```bash
-python main.py update <task_id> "New description"
-python main.py update <task_id> "New description" -d  # Show details after updating
+task-tracker update <task_id> "New description"
+task-tracker update <task_id> "New description" -d  # Show details after updating
 ```
 
 #### Delete a task
 ```bash
-python main.py delete <task_id>
-python main.py delete <task_id> -d  # Show details of deleted task
+task-tracker delete <task_id>
+task-tracker delete <task_id> -d  # Show details of deleted task
 ```
 
 #### Mark task as in-progress
 ```bash
-python main.py mark-in-progress <task_id>
-python main.py mark-in-progress <task_id> -d  # Show details after marking
+task-tracker mark-in-progress <task_id>
+task-tracker mark-in-progress <task_id> -d  # Show details after marking
 ```
 
 #### Mark task as done
 ```bash
-python main.py mark-done <task_id>
-python main.py mark-done <task_id> -d  # Show details after marking
+task-tracker mark-done <task_id>
+task-tracker mark-done <task_id> -d  # Show details after marking
 ```
 
 ### ⚙️ Options
@@ -105,39 +133,44 @@ python main.py mark-done <task_id> -d  # Show details after marking
 
 ```bash
 # Add a new task
-python main.py add "Buy groceries"
+task-tracker add "Buy groceries"
 
 # List all tasks
-python main.py list
+task-tracker list
 
 # Mark task 1 as in-progress
-python main.py mark-in-progress 1
+task-tracker mark-in-progress 1
 
 # Update task 2
-python main.py update 2 "Buy groceries and cook dinner"
+task-tracker update 2 "Buy groceries and cook dinner"
 
 # Mark task 1 as done
-python main.py mark-done 1
+task-tracker mark-done 1
 
 # List only done tasks with details
-python main.py list done -d
+task-tracker list done -d
 
 # Delete task 3
-python main.py delete 3
+task-tracker delete 3
 ```
 
 ## 📁 Project Structure
 
 ```
 task-tracker/
-├── main.py          # Entry point and CLI command handlers
-├── parser.py        # Command-line argument parsing
-├── task.py          # Task dataclass and status enum
-├── tasklist.py      # TaskList class with task management operations
-├── taskstorage.py   # JSON storage implementation with Protocol interface
-├── tasks.json       # Persistent task data (auto-generated)
-└── pyproject.toml   # Project metadata and configuration
+├── task_tracker/        # Main package directory
+│   ├── __init__.py      # Package initialization
+│   ├── main.py          # Entry point and CLI command handlers
+│   ├── parser.py        # Command-line argument parsing
+│   ├── task.py          # Task dataclass and status enum
+│   ├── tasklist.py      # TaskList class with task management operations
+│   └── taskstorage.py   # JSON storage implementation with Protocol interface
+├── tasks.json           # Legacy task data (for reference)
+├── pyproject.toml       # Project metadata and build configuration
+└── README.md            # This file
 ```
+
+**Note:** After installation, tasks are stored in `~/.task-tracker/tasks.json` in your home directory.
 
 ## 🏗️ Architecture
 

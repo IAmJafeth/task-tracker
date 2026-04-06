@@ -3,8 +3,8 @@ import json
 from pathlib import Path
 from typing import Protocol
 
-from task import Task, TaskStatus
-from tasklist import TaskList
+from .task import Task, TaskStatus
+from .tasklist import TaskList
 
 
 class TaskStorage(Protocol):

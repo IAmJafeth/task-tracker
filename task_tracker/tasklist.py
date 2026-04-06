@@ -1,4 +1,4 @@
-from task import Task, TaskStatus, format_task
+from .task import Task, TaskStatus, format_task
 from dataclasses import dataclass, field
 
 @dataclass

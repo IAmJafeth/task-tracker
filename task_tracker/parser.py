@@ -1,11 +1,9 @@
 import argparse
-import tomllib
+from . import __version__
 
 
 def get_app_version() -> str:
-    with open("pyproject.toml", "rb") as f:
-        data = tomllib.load(f)
-    return data.get("project", {}).get("version")
+    return __version__
 
 
 global_parser = argparse.ArgumentParser(add_help=False)
