@@ -2,7 +2,7 @@
 
 # 📝 Task Tracker
 
-![Status](https://img.shields.io/badge/status-work%20in%20progress-yellow)
+![Status](https://img.shields.io/badge/status-active-brightgreen)
 ![Python](https://img.shields.io/badge/python-3.13+-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
@@ -19,7 +19,9 @@ Built with Python | Part of [Roadmap.sh Task Tracker Project](https://roadmap.sh
 -  **Add, Update, Delete** - Full CRUD operations for task management
 -  **Status Tracking** - Mark tasks as todo, in-progress, or done
 -  **Task Filtering** - List all tasks or filter by specific status
--  **Persistent Storage** - All tasks saved automatically in JSON format *(TODO)*
+-  **Persistent Storage** - All tasks saved automatically in JSON format
+-  **Detailed View** - Optional detailed output showing timestamps for all operations
+-  **Color-Coded Output** - Visual status indicators with color-coded terminal output
 
 ## 📋 Requirements
 
@@ -130,9 +132,23 @@ python main.py delete 3
 task-tracker/
 ├── main.py          # Entry point and CLI command handlers
 ├── parser.py        # Command-line argument parsing
-├── task.py          # Task and TaskList classes with core functionality
+├── task.py          # Task dataclass and status enum
+├── tasklist.py      # TaskList class with task management operations
+├── taskstorage.py   # JSON storage implementation with Protocol interface
+├── tasks.json       # Persistent task data (auto-generated)
 └── pyproject.toml   # Project metadata and configuration
 ```
+
+## 🏗️ Architecture
+
+The application follows clean architecture principles with clear separation of concerns:
+
+- **Task**: Dataclass representing individual tasks with status management
+- **TaskList**: Manages a collection of tasks with CRUD operations
+- **TaskStorage Protocol**: Defines the interface for storage implementations
+- **JsonTaskStorage**: Concrete implementation for JSON file persistence
+- **Parser**: Handles command-line argument parsing
+- **Main**: Orchestrates the application flow and user interactions
 
 ## 📄 License
 
