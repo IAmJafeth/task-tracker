@@ -1,15 +1,17 @@
 from parser import parser
 from task import Task, format_task
-from tasklist import TaskList, format_task_list
+from tasklist import format_task_list
+from taskstorage import JsonTaskStorate
+from pathlib import Path
 
 def main():
-    task_list = TaskList()
-    task_list.create_task("Test Task")
-    task_list.create_task("Second Task")
-    task_list.mark_task_in_progress(2)
-    task_list.create_task("Task Completed")
-    task_list.mark_task_done(3)
+    BASE_DIR = Path(__file__).resolve().parent
+    SAVE_FILE = BASE_DIR / "tasks.json"
+    
     args = parser.parse_args()
+    
+    task_storage = JsonTaskStorate(SAVE_FILE)
+    task_list = task_storage.load()
     
     action: str = args.action
     
@@ -53,6 +55,7 @@ def main():
                
         case _:
             print("\033[0;31mError\033[0m: Invalid command")
+    task_storage.save(task_list)
 
 if __name__ == "__main__":
     main()
