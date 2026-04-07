@@ -40,15 +40,17 @@ class JsonTaskStorate:
         except json.JSONDecodeError:
             return TaskList()
 
-        if (
-            not {"id_counter", "tasks"}.issubset(data)
-            or not isinstance(data.get("tasks"), list)
-            or not isinstance(data.get("id_counter"), int)
+        if not {"id_counter", "tasks"}.issubset(data) or not isinstance(
+            data.get("tasks"), list
         ):
             return TaskList()
 
         task_list = TaskList()
-        task_list._id_counter = data.get("id_counter")
+
+        if isinstance(data["id_counter"], int):
+            task_list._id_counter = data.get("id_counter")
+        else:
+            task_list._id_counter = max([task["id"] for task in data["tasks"]]) + 1
 
         for item in data["tasks"]:
             try:
