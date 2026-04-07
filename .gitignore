@@ -11,3 +11,6 @@ wheels/
 
 # File Storage
 tasks.json
+
+#MacOS Fs
+.DS_Store
