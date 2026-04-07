@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 import json
 from pathlib import Path
 from typing import Protocol
@@ -54,12 +54,17 @@ class JsonTaskStorate:
 
         for item in data["tasks"]:
             try:
+                created_at_raw = item.get("created_at")
+                updated_at_raw = item.get("updated_at")
+                created_at = datetime.fromisoformat(created_at_raw) if created_at_raw else datetime.now()
+                updated_at = datetime.fromisoformat(updated_at_raw) if updated_at_raw else created_at
+                
                 task = Task(
                     item["id"],
-                    item["description"],
-                    TaskStatus(item["status"]),
-                    datetime.datetime.fromisoformat(item["created_at"]),
-                    datetime.datetime.fromisoformat(item["updated_at"]),
+                    item.get("description", "DEFAULT: Description not found"),
+                    TaskStatus(item.get("status", TaskStatus.TODO)),
+                    created_at,
+                    updated_at
                 )
                 task_list._tasks[task.id] = task
             except KeyError:
