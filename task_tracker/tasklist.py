@@ -1,5 +1,7 @@
-from .task import Task, TaskStatus, format_task
 from dataclasses import dataclass, field
+
+from .task import Task, TaskStatus, format_task
+
 
 @dataclass
 class TaskList:
@@ -31,6 +33,9 @@ class TaskList:
         if not task:
             raise ValueError(f"Task {id} does not exist")
 
+        if len(self._tasks) == 0:
+            self._id_counter = 1
+
         return task
 
     def mark_task_in_progress(self, id: int) -> Task:
@@ -50,17 +55,21 @@ class TaskList:
 
         task.mark_done()
         return task
-        
-        
-def format_task_list(task_list: TaskList, details: bool = False, status_filter: TaskStatus | None = None) -> str:
+
+
+def format_task_list(
+    task_list: TaskList, details: bool = False, status_filter: TaskStatus | None = None
+) -> str:
     tasks = task_list.list_tasks()
 
     if not tasks:
         return "No tasks saved yet!"
-    
+
     if status_filter:
-        formated_tasks = "\n".join(format_task(task, details) for task in tasks if task.status == status_filter)
+        formated_tasks = "\n".join(
+            format_task(task, details) for task in tasks if task.status == status_filter
+        )
     else:
-       formated_tasks = "\n".join(format_task(task, details) for task in tasks)
+        formated_tasks = "\n".join(format_task(task, details) for task in tasks)
 
     return formated_tasks
