@@ -56,6 +56,8 @@ def main():
                
         case _:
             print("\033[0;31mError\033[0m: Invalid command")
+            parser.print_help()
+            
     task_storage.save(task_list)
 
 if __name__ == "__main__":
