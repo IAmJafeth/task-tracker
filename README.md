@@ -182,8 +182,16 @@ The application follows clean architecture principles with clear separation of c
 - **TaskList**: Manages a collection of tasks with CRUD operations
 - **TaskStorage Protocol**: Defines the interface for storage implementations
 - **JsonTaskStorage**: Concrete implementation for JSON file persistence
-- **Parser**: Handles command-line argument parsing
-- **Main**: Orchestrates the application flow and user interactions
+- **Parser**: `build_parser()` creates parser instances for isolated testing
+- **Main**: `run(argv, storage, out, err)` orchestrates flow with dependency injection
+
+## 🧪 Testing
+
+Run the unit tests with:
+
+```bash
+python3 -m unittest discover -s tests -q
+```
 
 ## 📄 License
 
