@@ -38,17 +38,21 @@ class JsonTaskStorate:
         try:
             data: dict = json.loads(self.path.read_text())
         except json.JSONDecodeError:
-            return TaskList()
+            raise ValueError(f"Invalid JSON content in task storage: {self.path}") from None
 
         if not {"id_counter", "tasks"}.issubset(data) or not isinstance(
             data.get("tasks"), list
         ):
-            return TaskList()
+            raise ValueError(
+                "Invalid task storage format. Required keys: id_counter (int), tasks (list)"
+            )
 
         task_list = TaskList()
 
         if isinstance(data["id_counter"], int):
             task_list._id_counter = data.get("id_counter")
+        elif not data["tasks"]:
+            task_list._id_counter = 1
         else:
             task_list._id_counter = max([task["id"] for task in data["tasks"]]) + 1
 
